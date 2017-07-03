@@ -18,6 +18,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
         this.contatoService = contatoService;
         this.route = route;
         this.location = location;
+        this.isNew = true;
     }
     ngOnInit() {
         console.log("on init");
@@ -25,6 +26,7 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
         this.route.params.forEach((params) => {
             let id = +params['id']; // o + é para converter string em número
             if (id) {
+                this.isNew = false;
                 console.log("id selecioado >> " + id);
                 this.contatoService.getContato(id).then((contato) => {
                     console.log("get contato service contato");
@@ -34,16 +36,36 @@ let ContatoDetalheComponent = class ContatoDetalheComponent {
             }
         });
     }
-    teste(form) {
-        console.log(form);
+    getFormGroupClass(isValid, isPristine) {
+        return {
+            'form-group': true,
+            'has-danger': !isValid && !isPristine,
+            'has-success': isValid && !isPristine
+        };
+    }
+    getFormControlClass(isValid, isPristine) {
+        return {
+            'form-control': true,
+            'form-control-danger': !isValid && !isPristine,
+            'form-control-success': isValid && !isPristine
+        };
+    }
+    onSubmit() {
         console.log(this.contato);
+        console.log("novo >> " + this.isNew);
+        if (this.isNew) {
+            console.log("cadastra novo contato");
+        }
+        else {
+            console.log("alterar contato");
+        }
     }
 };
 ContatoDetalheComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'contato-detalhe',
-        templateUrl: 'contato-detalha.component.html'
+        templateUrl: 'contato-detalha.component.html',
     }),
     __metadata("design:paramtypes", [contato_service_1.ContatoService,
         router_1.ActivatedRoute,

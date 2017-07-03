@@ -1,5 +1,6 @@
 {
   "name": "angular-quickstart",
+  "description": "angular-quickstart",
   "version": "1.0.0",
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
@@ -7,6 +8,11 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/indhio/angular2/tree/master/01-cadastro-contatos"
+  },
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",

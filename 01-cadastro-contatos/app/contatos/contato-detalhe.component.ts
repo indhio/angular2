@@ -8,11 +8,13 @@ import { ContatoService } from "./contato.service";
 @Component({
     moduleId: module.id,
     selector: 'contato-detalhe',
-    templateUrl: 'contato-detalha.component.html'
+    templateUrl: 'contato-detalha.component.html',
+
 })
 export class ContatoDetalheComponent  implements OnInit {
 
     contato: Contato;
+    private isNew: boolean = true;
 
     constructor(
         private contatoService : ContatoService,
@@ -27,23 +29,44 @@ export class ContatoDetalheComponent  implements OnInit {
             let id : number = +params['id']; // o + é para converter string em número
             
             if (id) {
+                this.isNew = false;
                 console.log("id selecioado >> " +  id);
                 this.contatoService.getContato(id).then((contato: Contato) => {
                 console.log("get contato service contato"); 
                 console.log(contato); 
                 this.contato = contato;
                 });
-
             }
-
-
-
         });
     }
 
-    teste(form) : void {
-        console.log(form);
-        console.log(this.contato);
+    getFormGroupClass(isValid: boolean, isPristine: boolean): {} {
+        return {
+            'form-group' : true,
+            'has-danger' : !isValid && !isPristine,
+            'has-success' : isValid && !isPristine
+        }
     }
+    
+    getFormControlClass(isValid: boolean, isPristine: boolean): {} {
+        return {
+            'form-control' : true,
+            'form-control-danger' : !isValid && !isPristine,
+            'form-control-success' : isValid && !isPristine
+        }
+    }
+
+    onSubmit() : void {
+        console.log(this.contato);
+        console.log("novo >> " + this.isNew);
+
+        if (this.isNew) {
+            console.log("cadastra novo contato");
+        } else {
+            console.log("alterar contato");
+        }
+    }
+
+
 
 }
