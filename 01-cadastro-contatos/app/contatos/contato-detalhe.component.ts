@@ -60,11 +60,17 @@ export class ContatoDetalheComponent  implements OnInit {
         console.log(this.contato);
         console.log("novo >> " + this.isNew);
 
+        let promise;
+
         if (this.isNew) {
             console.log("cadastra novo contato");
+            promise = this.contatoService.create(this.contato);
         } else {
             console.log("alterar contato");
+            promise = this.contatoService.update(this.contato);
         }
+
+        promise.then(contato => this.location.back());
     }
 
 

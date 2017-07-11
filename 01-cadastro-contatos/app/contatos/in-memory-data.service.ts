@@ -12,7 +12,18 @@ export class InMemoryDataService implements InMemoryDbService {
             {id: 4, nome: 'Haitinano', email: 'h@h.com', telefone: '333334444'},
             {id: 5, nome: 'Xixpetano', email: 'x@x.com', telefone: '55555'}
         ];
-        return {contatos};
+        
+        let carros: any[] = [
+            {id: 1, descricao: 'Camaro'},
+            {id: 2, descricao: 'Mustang'}
+        ];
+        
+        return {
+            'contatos' : contatos,
+            'carros' : carros
+        };
+
+
     }
         
 }
